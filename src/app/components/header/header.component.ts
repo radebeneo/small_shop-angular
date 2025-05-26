@@ -10,7 +10,7 @@ import { PrimaryButtonComponent } from '../primary-button/primary-button.compone
     <div
       class="bg-slate-100 px-4 py-3 shadow-md flex justify-between items-center"
     >
-      <button class="text-2xl" routerLink="/">My Store</button>
+      <button class="text-2xl" routerLink="/">luminary</button>
       <app-primary-button label="{{ cartLabel() }}" routerLink="/cart" />
     </div>
   `,

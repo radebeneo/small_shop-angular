@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { Product } from '../../products-list/products-list.component';
+import { Product } from '../../../models/product.model';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { CartService } from '../../../services/cart.service';
 
@@ -10,7 +10,7 @@ import { CartService } from '../../../services/cart.service';
     <div
       class="bg-white shadow-md border rounded-xl p-6 flex gap-4 items-center"
     >
-      <img [src]="item().image" class="w-[50px] h-[50px] object-contain" />
+      <img [src]="item().images" class="w-[50px] h-[50px] object-contain" />
       <div class="flex flex-col">
         <span class="text-md font-bold">{{ item().title }}</span>
         <span class="text-sm"> {{ '$' + item().price }}</span>
