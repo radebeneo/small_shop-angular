@@ -51,7 +51,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
-                "glob": "**/*",
+            "glob": "**/*",
                 "input": "public"
               }
             ],
@@ -122,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0a5cccae-2908-4d05-98d8-52a9a7fc44c1"
   }
 }

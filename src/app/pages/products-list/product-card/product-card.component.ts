@@ -1,44 +1,34 @@
-import { Component, inject, input } from '@angular/core';
-import { Product } from '../products-list.component';
+import { Component, Input, inject } from '@angular/core';
+import { Product } from '../../../models/product.model';
 import { CartService } from '../../../services/cart.service';
 import { PrimaryButtonComponent } from '../../../components/primary-button/primary-button.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [PrimaryButtonComponent],
+  imports: [PrimaryButtonComponent, CommonModule],
   template: `
-    <div
-      class="bg-white shadow-md border rounded-xl p-6 flex flex-col gap-6 relative"
-    >
-      <div class="mx-auto">
-        <img
-          [src]="product().image"
-          class="w-[200px] h-[100px] object-contain"
-        />
-      </div>
-      <div class="flex flex-col">
-        <span class="text-md font-bold">{{ product().title }}</span>
-        <span class="text-sm"> {{ '$' + product().price }}</span>
-        <app-primary-button
-          (btnClicked)="cartService.addToCart(product())"
-          class="mt-3"
-          label="Add to Cart"
-        />
-      </div>
-
-      <span
-        class="absolute top-2 right-3 text-sm font-bold"
-        [class]="product().stock ? 'text-green-500' : 'text-red-500'"
-      >
-        @if (product().stock) {
-        {{ product().stock }} left } @else { Out of stock }
+    <div class="product-card">
+      <img *ngIf="product?.thumbnail" [src]="product.thumbnail" alt="{{ product.title }}" />
+      <!-- <div class="image-gallery" *ngIf="product?.images?.length">
+        <img *ngFor="let img of product.images" [src]="img" alt="Additional images" />
+      </div> -->
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.price | currency }}</p>
+      <span [ngClass]="product.stock > 0 ? 'in-stock' : 'out-of-stock'">
+        {{ product.availabilityStatus }}
       </span>
+      <app-primary-button (click)="addToCart()" text="Add to Cart"></app-primary-button>
     </div>
   `,
   styles: ``,
 })
 export class ProductCardComponent {
-  cartService = inject(CartService);
+  @Input() product!: Product;
 
-  product = input.required<Product>();
+  constructor(private cartService: CartService) {}
+
+  addToCart(): void {
+    this.cartService.addProduct(this.product);
+  }
 }

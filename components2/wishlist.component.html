@@ -1,0 +1,7 @@
+<h2>My Wishlist</h2>
+<div *ngFor="let item of wishlistItems">
+  <img [src]="item.thumbnail" alt="{{ item.title }}" />
+  <h4>{{ item.title }}</h4>
+  <p>{{ item.description }}</p>
+  <button (click)="removeFromWishlist(item.id)">Remove</button>
+</div>
