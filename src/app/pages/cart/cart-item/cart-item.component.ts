@@ -10,22 +10,23 @@ import { CartService } from '../../../services/cart.service';
     <div
       class="bg-white shadow-md border rounded-xl p-6 flex gap-4 items-center"
     >
-      <img [src]="item().images" class="w-[50px] h-[50px] object-contain" />
+      <img [src]="item().thumbnail" class="w-[50px] h-[50px] object-contain" />
       <div class="flex flex-col">
         <span class="text-md font-bold">{{ item().title }}</span>
         <span class="text-sm"> {{ '$' + item().price }}</span>
       </div>
+      <div class="flex items-center gap-2">
+        <app-button label="-" (btnClicked)="cartService.decrementQuantity(item())"></app-button>
+        <span class="text-lg">{{ item().quantity }}</span>
+        <app-button label="+" (btnClicked)="cartService.incrementQuantity(item())"></app-button>
+      </div>
       <div class="flex-1"></div>
-      <app-button
-        label="Remove"
-        (btnClicked)="cartService.removeFromCart(item())"
-      />
+      <app-button label="Remove" (btnClicked)="cartService.removeFromCart(item())"/>
     </div>
   `,
   styles: ``,
 })
 export class CartItemComponent {
   item = input.required<Product>();
-
   cartService = inject(CartService);
 }

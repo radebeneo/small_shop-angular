@@ -27,7 +27,9 @@ export type Product = {
     reviewerEmail: string;
   }[];
   returnPolicy: string;
+  maximumOrderQuantity: number;
   minimumOrderQuantity: number;
+  quantity: number;
   meta: {
     createdAt: string;
     updatedAt: string;

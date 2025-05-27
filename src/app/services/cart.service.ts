@@ -8,12 +8,45 @@ export class CartService {
   cart = signal<Product[]>([]);
 
   addProduct(product: Product): void {
-  this.cart.update((cart) => [...cart, product]); // ✅ Adds a new product to the cart
+  
+  const existingProduct = this.cart().find((p) => p.id === product.id);
+
+    this.cart.update((cart) =>
+      existingProduct
+        ? cart.map((p) =>
+            p.id === product.id ? p.quantity < p.maximumOrderQuantity
+        ? { ...p, quantity: p.quantity + 1 }
+        : (alert(`Maximum quantity of ${p.maximumOrderQuantity} reached.`), p)
+      : p
+          )
+        : [...cart, { ...product, quantity: 1 }]
+    ); // ✅ Adds a new product to the cart
 
 }
 
 
   removeFromCart(product: Product) {
     this.cart.set(this.cart().filter((p) => p.id !== product.id));
+  }
+
+  incrementQuantity(product: Product) {
+    this.cart.update((cart) =>
+      cart.map((p) =>
+        p.id === product.id ? p.quantity < p.maximumOrderQuantity
+    ? { ...p, quantity: p.quantity + 1 }
+    : (alert(`Maximum quantity of ${p.maximumOrderQuantity} reached.`), p)
+  : p
+)
+    );
+  }
+
+  decrementQuantity(product: Product) {
+    this.cart.update((cart) =>
+      cart.map((p) =>
+        p.id === product.id
+          ? { ...p, quantity: Math.max(p.quantity - 1, 1) }
+          : p
+      )
+    );
   }
 }
