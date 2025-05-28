@@ -8,7 +8,7 @@ import { Component, input, output } from '@angular/core';
       class=" bg-blue-500 text-white w-full border px-5 py-2 rounded-xl shadow-md hover:opacity-90"
       (click)="btnClicked.emit()"
     >
-      <span class="text-md">{{ label() }}</span>
+      <span class="text-md"> <i class="bi bi-cart2"></i>{{ label() }}</span>
     </button>
   `,
   styles: ``,

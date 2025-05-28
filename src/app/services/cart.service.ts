@@ -7,8 +7,12 @@ import { Product } from '../models/product.model';
 export class CartService {
   cart = signal<Product[]>([]);
 
+  isProductInCart(product: Product): boolean {
+    return this.cart().some(cartItem => cartItem.id === product.id);
+  }
+
   addProduct(product: Product): void {
-  
+ 
   const existingProduct = this.cart().find((p) => p.id === product.id);
 
     this.cart.update((cart) =>
@@ -20,7 +24,7 @@ export class CartService {
       : p
           )
         : [...cart, { ...product, quantity: 1 }]
-    ); // ✅ Adds a new product to the cart
+    );
 
 }
 
