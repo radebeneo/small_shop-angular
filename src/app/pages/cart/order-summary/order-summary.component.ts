@@ -38,6 +38,7 @@ export class OrderSummaryComponent {
   });
 
   total = computed(() => {
-    return (parseFloat(this.subtotal()) + this.DELIVERY_HANDLING_FEE).toFixed(2);
+    const subtotalValue = parseFloat(this.subtotal());
+    return subtotalValue > 0 ? (subtotalValue + this.DELIVERY_HANDLING_FEE).toFixed(2) : '0.00';
   });
 }

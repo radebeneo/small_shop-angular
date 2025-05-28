@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild} from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Product } from '../../../models/product.model';
 import { CartService } from '../../../services/cart.service';
 import { WishlistService } from '../../../services/wishlist.service';
@@ -8,7 +9,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [PrimaryButtonComponent, CommonModule, NotificationBannerComponent],
+  imports: [PrimaryButtonComponent, CommonModule, NotificationBannerComponent, RouterModule],
   template: `
   <app-notification-banner #banner></app-notification-banner>
   <div class="product-card bg-white shadow-md rounded-lg p-4 flex flex-col items-center relative">
@@ -34,7 +35,9 @@ import { CommonModule } from '@angular/common';
         <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-all active:scale-90" (click)="addToCart()">
           <i class="bi bi-bag-fill"></i> Add to Cart
         </button>
-        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition-all">See more...</button>
+        <button routerLink="/checkout" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-200 hover:text-gray-600 transition-all">
+        <i class="bi bi-cart2"></i> Buy Now
+        </button>
       </div>
   </div>
 
